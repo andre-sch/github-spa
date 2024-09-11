@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserProfileAggregator {
+  @CrossOrigin
   @GetMapping("/profiles/{username}")
   public RequiredUserProfile execute(@PathVariable String username)
     throws InterruptedException, ExecutionException

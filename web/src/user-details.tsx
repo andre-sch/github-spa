@@ -1,23 +1,42 @@
 import { LinkIcon, LocationIcon, MailIcon, OrganizationIcon, PeopleIcon } from "@primer/octicons-react";
-import "./styles/user-details.css"
+import type { UserProfile } from "./user-profile";
 
-function UserDetails() {
+import "./styles/user-details.css";
+
+function UserDetails({
+  name,
+  username,
+  biography,
+  avatar_url,
+  followers,
+  following,
+  company,
+  location,
+  email,
+  website
+}: UserProfile) {
   return <aside className="user-details">
-    <img src="https://avatars.githubusercontent.com/u/77517189?v=4" alt="avatar" />
+    <img src={avatar_url} alt="avatar" />
     <header>
-      <h1>André Schlichting</h1>
-      <h2>andre-sch</h2>
+      <h1>{name}</h1>
+      <h2>{username}</h2>
     </header>
-    <p>Computer Science student at UEM. Currently focused on web development.</p>
-    <button disabled>Edit profile</button>
-    <span><PeopleIcon/> <em>9</em> followers <em>· 9</em> following</span>
+    <p>{biography}</p>
+    <button disabled>Follow</button>
+    <span><PeopleIcon/> <em>{formatCount(followers)}</em> followers <em>· {formatCount(following)}</em> following</span>
     <ul>
-      <li><OrganizationIcon/> {"@Rocket"}</li>
-      <li><LocationIcon/> {"Brasil"}</li>
-      <li><MailIcon/> {"andresch.dev@gmail.com"}</li>
-      <li><LinkIcon/> {"in/andre-sch"}</li>
+      {company && <li><OrganizationIcon/>{company}</li>}
+      {location && <li><LocationIcon/>{location}</li>}
+      {email && <li><MailIcon/>{email}</li>}
+      {website && <li><LinkIcon/>{website}</li>}
     </ul>
   </aside>
+}
+
+function formatCount(count: number): string {
+  return count >= 1000
+    ? `${Math.floor(count / 1000)}k`
+    : count.toString();
 }
 
 export { UserDetails };

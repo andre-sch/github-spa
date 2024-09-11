@@ -24,6 +24,7 @@
 
 .user-details p {
   font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .user-details button {
@@ -41,7 +42,7 @@
 }
 
 .user-details span {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: #9198a1;
 }
 
