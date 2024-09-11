@@ -1,5 +1,15 @@
+import { UserDetails } from "./user-details"
+
 function App() {
-  return <h1>Hello world</h1>
+  return (
+    <>
+      <header></header>
+      <main>
+        <UserDetails />
+        <section></section>
+      </main>
+    </>
+  )
 }
 
 export { App }
