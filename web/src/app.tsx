@@ -18,7 +18,7 @@ function App() {
       <header></header>
       <main>
         {userProfile && <UserDetails {...userProfile} />}
-        <UserRepositories />
+        {userProfile && <UserRepositories {...userProfile} />}
       </main>
     </>
   );

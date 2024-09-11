@@ -51,6 +51,14 @@
   color: #9198a1;
 }
 
+.repository-card footer .circle {
+  margin-right: 0.25rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  background: #9198a1;
+  border-radius: 50%;
+}
+
 .repository-card footer svg {
   margin-right: 0.25rem;
   fill: #9198a1

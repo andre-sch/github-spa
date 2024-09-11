@@ -1,4 +1,6 @@
 import { LinkIcon, LocationIcon, MailIcon, OrganizationIcon, PeopleIcon } from "@primer/octicons-react";
+
+import { formatCount } from "./format";
 import type { UserProfile } from "./user-profile";
 
 import "./styles/user-details.css";
@@ -31,12 +33,6 @@ function UserDetails({
       {website && <li><LinkIcon/>{website}</li>}
     </ul>
   </aside>
-}
-
-function formatCount(count: number): string {
-  return count >= 1000
-    ? `${Math.floor(count / 1000)}k`
-    : count.toString();
 }
 
 export { UserDetails };
