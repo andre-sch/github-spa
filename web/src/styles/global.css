@@ -13,6 +13,6 @@ body {
   background: #0d1117;
 }
 
-ul {
+ul, ol {
   list-style: none;
 }

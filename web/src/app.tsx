@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { UserDetails } from "./user-details";
+import { UserRepositories } from "./user-repositories";
 import { getUserProfile } from "./api";
 
 import type { UserProfile } from "./user-profile";
@@ -17,7 +18,7 @@ function App() {
       <header></header>
       <main>
         {userProfile && <UserDetails {...userProfile} />}
-        <section></section>
+        <UserRepositories />
       </main>
     </>
   );
