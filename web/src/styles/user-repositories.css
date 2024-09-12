@@ -1,7 +1,7 @@
 .user-repositories {
   width: 56rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, calc(50% - 0.5rem));
   gap: 1rem;
 }
 
@@ -21,7 +21,7 @@
 .repository-card h1 {
   display: inline;
   font-size: 0.875rem;
-  word-break: break-all;
+  overflow-wrap: break-word;
   color: #4493f8;
 }
 
@@ -40,7 +40,7 @@
   margin: 0.5rem 0;
   height: max-content;
   font-size: 0.75rem;
-  word-break: break-all;
+  overflow-wrap: break-word;
   color: #9198a1;
 }
 
