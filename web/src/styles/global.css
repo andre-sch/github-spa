@@ -16,3 +16,7 @@ body {
 ul, ol {
   list-style: none;
 }
+
+a, button {
+  cursor: pointer;
+}

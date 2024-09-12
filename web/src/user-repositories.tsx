@@ -15,7 +15,11 @@ function UserRepositories(props: { username: string; repositories: Repository[] 
         <li className="repository-card" key={repo.name}>
           <header>
             <RepoIcon />
-            <h1>{repo.name}</h1>
+            <a
+              href={`https://github.com/${props.username}/${repo.name}`}
+              target="_blank"
+              children={repo.name}
+            />
             <span className="visibility">Public</span>
           </header>
           <p>{repo.description}</p>
@@ -37,6 +41,13 @@ function UserRepositories(props: { username: string; repositories: Repository[] 
           </footer>
         </li>
       ))}
+      <li className="remaining-repositories">
+        <a
+          href={`https://github.com/${props.username}?tab=repositories`}
+          target="_blank"
+          children="ver mais"
+        />
+      </li>
     </ol>
   );
 }

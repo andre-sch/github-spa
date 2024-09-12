@@ -18,14 +18,19 @@
   fill: #9198a1;
 }
 
-.repository-card h1 {
+.repository-card header a {
   display: inline;
   font-size: 0.875rem;
   overflow-wrap: break-word;
+  text-decoration: none;
   color: #4493f8;
 }
 
-.repository-card .visibility {
+.repository-card header a:hover {
+  text-decoration: underline;
+}
+
+.repository-card header .visibility {
   margin-left: 0.4rem;
   padding: 0.12rem 0.5rem;
   font-size: 0.75rem;
@@ -63,4 +68,14 @@
   margin-left: 1rem;
   margin-right: 0.25rem;
   fill: #9198a1
+}
+
+.remaining-repositories {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remaining-repositories a {
+  color: #4493f8;
 }
