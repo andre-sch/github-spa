@@ -1,0 +1,50 @@
+.page-header {
+  display: flex;
+  align-items: center;
+  height: 4rem;
+  padding: 1rem 4rem;
+  background: #010409;
+  border-bottom: 1px solid #3d444d;
+}
+
+.page-header h1 {
+  margin-left: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.page-header div {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.page-header button {
+  width: 22rem;
+  height: 2rem;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.9rem;
+  text-align: left;
+  border: 1px solid #3d444d;
+  border-radius: 0.375rem;
+}
+
+.page-header button svg {
+  margin-right: 0.5rem;
+  fill: #9198a1;
+}
+
+.page-header button span {
+  color: #9198a1;
+}
+
+.page-header button kbd {
+  display: inline-block;
+  width: 0.75rem;
+  height: 1rem;
+  color: #9198a1;
+  font-size: 0.75rem;
+  text-align: center;
+  border: 1px solid #9198a1;
+  border-radius: 0.2rem;
+}

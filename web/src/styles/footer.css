@@ -1,0 +1,16 @@
+.page-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 0 2.5rem;
+}
+
+.page-footer svg {
+  margin-right: 0.5rem;
+  fill: #9198a1;
+}
+
+.page-footer p {
+  font-size: 0.75rem;
+  color: #9198a1;
+}
