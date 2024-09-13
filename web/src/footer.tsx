@@ -6,7 +6,7 @@ function Footer() {
   return (
     <footer className="page-footer">
       <MarkGithubIcon size={24}/>
-      <p>© 2024 GitHub, Inc. | app clone made by andre-sch in 2024.</p>
+      <p>© 2024 GitHub, Inc. | app clone made by andre-sch</p>
     </footer>
   );
 }
