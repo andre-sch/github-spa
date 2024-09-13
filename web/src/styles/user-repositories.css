@@ -1,3 +1,13 @@
+.markdown-body + h1 {
+  margin-top: 1.5rem;
+}
+
+h1:has(+.user-repositories) {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
 .user-repositories {
   width: 56rem;
   display: grid;

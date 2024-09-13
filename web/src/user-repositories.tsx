@@ -9,7 +9,8 @@ import "./styles/user-repositories.css"
 function UserRepositories(props: { username: string; repositories: Repository[] }) {
   var filteredRepositories = getMainRepositories(props.username, props.repositories);
 
-  return (
+  return <>
+    <h1>Repositories</h1>
     <ol className="user-repositories">
       {filteredRepositories.map(repo => (
         <li className="repository-card" key={repo.name}>
@@ -45,11 +46,11 @@ function UserRepositories(props: { username: string; repositories: Repository[] 
         <a
           href={`https://github.com/${props.username}?tab=repositories`}
           target="_blank"
-          children="ver mais"
+          children="See more"
         />
       </li>
     </ol>
-  );
+  </>;
 }
 
 function Conditional(props: { on: any; children: ReactNode }) {
