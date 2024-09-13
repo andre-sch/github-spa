@@ -2,5 +2,10 @@ main {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
+  flex-grow: 1;
   padding-top: 2rem;
+}
+
+main > section {
+  width: 56rem;
 }

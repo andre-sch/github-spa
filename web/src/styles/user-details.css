@@ -55,6 +55,7 @@
 .user-details ul {
   margin: 1rem 0;
   font-size: 0.85rem;
+  list-style: none;
 }
 
 .user-details li + li {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Header } from "./header";
 import { UserDetails } from "./user-details";
+import { UserReadme } from "./user-readme";
 import { UserRepositories } from "./user-repositories";
 import { Footer } from "./footer";
 
@@ -20,10 +21,15 @@ function App() {
   return (
     <>
       <Header />
-      <main>
-        {userProfile && <UserDetails {...userProfile} />}
-        {userProfile && <UserRepositories {...userProfile} />}
-      </main>
+      {userProfile &&
+        <main>
+          <UserDetails {...userProfile} />
+          <section>
+            <UserReadme {...userProfile} />
+            <UserRepositories {...userProfile} />
+          </section>
+        </main>
+      }
       <Footer />
     </>
   );

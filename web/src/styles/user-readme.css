@@ -1,0 +1,14 @@
+.markdown-body {
+  padding: 1.5rem;
+  border: 1px solid #3d444d;
+  border-radius: 0.375rem;
+}
+
+.markdown-body > span:first-child {
+  font-size: 0.75rem;
+  color: #9198a1;
+}
+
+.markdown-body > span:first-child em {
+  font-style: normal;
+}
