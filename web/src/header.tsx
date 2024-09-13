@@ -3,13 +3,14 @@ import { MarkGithubIcon, SearchIcon } from "@primer/octicons-react";
 
 import "./styles/header.css"
 
-function Header(props: { username?: string }) {
-  const standardTitle = "Github clone";
-  const [title, setTitle] = useState<string>(standardTitle);
+function Header(props: { name?: string; username?: string }) {
+  const [title, setTitle] = useState<string>(document.title);
 
   useEffect(() => {
-    setTitle(props.username || standardTitle);
-    document.title = title;
+    if (props.username) {
+      setTitle(props.username);
+      setDocumentTitle();
+    }
   }, [props.username]);
 
   return (
@@ -28,6 +29,10 @@ function Header(props: { username?: string }) {
       </div>
     </header>
   );
+
+  function setDocumentTitle() {
+    document.title = `${props.username} (${props.name})`;
+  }
 }
 
 export { Header };

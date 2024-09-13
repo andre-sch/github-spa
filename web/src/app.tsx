@@ -20,7 +20,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header {...userProfile} />
       {userProfile &&
         <main>
           <UserDetails {...userProfile} />
