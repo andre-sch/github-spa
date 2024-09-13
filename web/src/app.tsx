@@ -7,7 +7,7 @@ import { Footer } from "./footer";
 import { getUserProfile } from "./api";
 import type { UserProfile } from "./user-profile";
 
-import "./styles/main.css"
+import "./styles/app.css"
 
 function App() {
   const [userProfile, setUserProfile] = useState<UserProfile>();
