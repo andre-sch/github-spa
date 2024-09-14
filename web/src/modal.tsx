@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { SearchIcon, XCircleFillIcon } from "@primer/octicons-react";
+import { QueryResults } from "./query-results";
 
 import "./styles/modal.css";
 
@@ -20,6 +21,7 @@ function Modal(props: { setModalEnabled: (value: boolean) => void; }) {
             <XCircleFillIcon />
           </button>
         </div>
+        <QueryResults />
       </div>
       <div className="backdrop" onClick={() => props.setModalEnabled(false)}></div>
     </>
