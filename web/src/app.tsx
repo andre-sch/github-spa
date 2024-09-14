@@ -14,7 +14,7 @@ function App() {
   const [userProfile, setUserProfile] = useState<UserProfile>();
 
   useEffect(() => {
-    getUserProfile("andre-sch")
+    getUserProfile("Fernanda-Kipper")
       .then(setUserProfile);
   }, []);
 

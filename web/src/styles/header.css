@@ -13,13 +13,8 @@
   font-weight: 600;
 }
 
-.page-header div {
-  display: flex;
-  justify-content: flex-end;
-  flex-grow: 1;
-}
-
-.page-header button {
+.page-header > button {
+  margin: 0 0.75rem 0 auto;
   width: 22rem;
   height: 2rem;
   padding: 0.3rem 0.5rem;
@@ -29,16 +24,16 @@
   border-radius: 0.375rem;
 }
 
-.page-header button svg {
+.page-header > button svg {
   margin-right: 0.5rem;
   fill: #9198a1;
 }
 
-.page-header button span {
+.page-header > button span {
   color: #9198a1;
 }
 
-.page-header button kbd {
+.page-header > button kbd {
   display: inline-block;
   width: 0.75rem;
   height: 1rem;
@@ -47,4 +42,10 @@
   text-align: center;
   border: 1px solid #9198a1;
   border-radius: 0.2rem;
+}
+
+.page-header .delimiter {
+  width: 1px;
+  height: 1.25rem;
+  background-color: #3d444d;
 }
