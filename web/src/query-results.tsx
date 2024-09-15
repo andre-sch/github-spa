@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { PeopleIcon, RepoIcon } from "@primer/octicons-react";
 import { Conditional } from "./conditional";
 
+import { ProfileSelectionPublisher } from "./user-selection";
 import { getProfileQueryResults } from "./api";
 import type { ProfileQueryResult } from "./user-query";
 
@@ -25,7 +26,7 @@ function QueryResults(props: { query: string }) {
     <ul className="query-results">
       {results.map(profile => (
         <li key={profile.username}>
-          <button>
+          <button onClick={() => select(profile.username)}>
             <img src={profile.avatar_url} alt="avatar" />
             <div>
               <header>
@@ -56,6 +57,11 @@ function QueryResults(props: { query: string }) {
       ))}
     </ul>
   );
+
+  function select(username: string) {
+    const profileSelectionPublisher = new ProfileSelectionPublisher();
+    profileSelectionPublisher.publish(username);
+  }
 }
 
 export { QueryResults };

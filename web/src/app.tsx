@@ -5,18 +5,23 @@ import { UserReadme } from "./user-readme";
 import { UserRepositories } from "./user-repositories";
 import { Footer } from "./footer";
 
+import { ProfileSelectionSubscriber } from "./user-selection";
 import { getUserProfile } from "./api";
 import type { UserProfile } from "./user-profile";
 
 import "./styles/app.css"
 
 function App() {
-  const [userProfile, setUserProfile] = useState<UserProfile>();
+  const [username, setUsername] = useState("andre-sch");
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+
+  const profileSelectionSubscriber = new ProfileSelectionSubscriber();
+  profileSelectionSubscriber.subscribe((e) => setUsername(e.detail.username))
 
   useEffect(() => {
-    getUserProfile("Fernanda-Kipper")
+    getUserProfile(username)
       .then(setUserProfile);
-  }, []);
+  }, [username]);
 
   return (
     <>
