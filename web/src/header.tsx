@@ -15,6 +15,12 @@ function Header(props: { name?: string; username?: string }) {
     }
   }, [props.username]);
 
+  const trigger = "/";
+  document.addEventListener("keyup", (event) => {
+    if (event.key == trigger)
+      setModalEnabled(true);
+  });
+
   return (
     <header className="page-header">
       <a
@@ -25,7 +31,7 @@ function Header(props: { name?: string; username?: string }) {
       <h1>{title}</h1>
       <button onClick={() => setModalEnabled(true)}>
         <SearchIcon />
-        <span>Type <kbd>/</kbd> to search</span>
+        <span>Type <kbd>{trigger}</kbd> to search</span>
       </button>
       <div className="delimiter" />
 
