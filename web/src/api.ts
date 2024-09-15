@@ -5,23 +5,33 @@ const api = axios.create({
   baseURL: "http://localhost:8080"
 });
 
-async function getUserProfile(username: string): Promise<UserProfile> {
-  var response = await api.get<UserProfile>(`/profiles/${username}`);
-  return response.data;
+async function getUserProfile(username: string): Promise<UserProfile | null> {
+  return fetch<UserProfile>(`/profiles/${username}`);
 }
 
 async function getProfileReadme(username: string): Promise<string | null> {
-  var response = await axios.get<string>(profileReadmeHost(username) + "README.md");
-  if(response.status == 200) return response.data;
-  else return null;
-}
-
-function contentHost(username: string, repo: string) {
-  return `https://raw.githubusercontent.com/${username}/${repo}/master/`;
+  return fetch<string>(profileReadmeHost(username) + "README.md");
 }
 
 function profileReadmeHost(username: string) {
   return contentHost(username, username);
 }
 
-export { getUserProfile, getProfileReadme, profileReadmeHost };
+function contentHost(username: string, repo: string) {
+  return `https://raw.githubusercontent.com/${username}/${repo}/master/`;
+}
+
+async function fetch<T>(route: string): Promise<T | null> {
+  try {
+    var response = await api.get<T>(route);
+    return response.data;
+  } catch(e) {
+    return null;
+  }
+}
+
+export {
+  getUserProfile,
+  getProfileReadme,
+  profileReadmeHost
+};
