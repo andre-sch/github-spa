@@ -21,7 +21,7 @@ function Modal(props: { setModalEnabled: (value: boolean) => void; }) {
             <XCircleFillIcon />
           </button>
         </div>
-        <QueryResults />
+        <QueryResults query={profileQuery} />
       </div>
       <div className="backdrop" onClick={() => props.setModalEnabled(false)}></div>
     </>

@@ -46,6 +46,7 @@
 .query-results p {
   margin: 0.5rem 0 0.75rem;
   font-size: 0.875rem;
+  text-align: left;
 }
 
 .query-results footer {

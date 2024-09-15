@@ -1,6 +1,5 @@
 import { RepoForkedIcon, RepoIcon, StarIcon } from "@primer/octicons-react";
-import type { ReactNode } from "react";
-
+import { Conditional } from "./conditional";
 import { formatCount } from "./format";
 import type { Repository } from "./user-profile";
 
@@ -51,10 +50,6 @@ function UserRepositories(props: { username: string; repositories: Repository[] 
       </li>
     </ol>
   </>;
-}
-
-function Conditional(props: { on: any; children: ReactNode }) {
-  return Boolean(props.on) && props.children;
 }
 
 function getMainRepositories(username: string, repositories: Repository[]): Repository[] {
