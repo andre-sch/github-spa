@@ -30,7 +30,7 @@ public class UserProfileAggregator {
   @CrossOrigin
   @GetMapping("/profiles/search")
   public RequiredQueryResult[] search(@RequestParam("q") String query) {
-    var accessKeyQuery = externalAPI.get("/search/users?q=" + query, AccessKeyQuery.class).join();
+    var accessKeyQuery = externalAPI.get("/search/users?q=" + query + "&per_page=5", AccessKeyQuery.class).join();
     var accessKeys = accessKeyQuery.items();
 
     var requiredQueryResult = new RequiredQueryResult[accessKeys.length];
