@@ -29,32 +29,45 @@ public class UserProfileAggregator {
 
   @CrossOrigin
   @GetMapping("/profiles/search")
-  public RequiredQueryResult[] search(@RequestParam("q") String query) {
-    var accessKeyQuery = externalAPI.get("/search/users?q=" + query + "&per_page=5", AccessKeyQuery.class).join();
-    var accessKeys = accessKeyQuery.items();
+  public RequiredQueryResponse search(
+    @RequestParam("q") String query,
+    @RequestParam(name="page", defaultValue="0") int currentPage
+  ) {
+    int resultsPerPage = 5;
+    var providedQueryResponse = externalAPI.get(
+      "/search/users?q=" + query + "&per_page=" + resultsPerPage + "&page=" + currentPage,
+      ProvidedQueryResponse.class
+    ).join();
+    
+    var accessKeys = providedQueryResponse.items();
+    var requiredQueryResults = fetchQueryResultsBy(accessKeys);
 
-    var requiredQueryResult = new RequiredQueryResult[accessKeys.length];
-    var promises = new LinkedList<CompletableFuture<Void>>();
+    int numberOfResults = providedQueryResponse.total_count();
+    int numberOfPages = (int) Math.ceil((double) numberOfResults / resultsPerPage);
+    return new RequiredQueryResponse(currentPage, numberOfPages, numberOfResults, requiredQueryResults);
+  }
 
+  public RequiredQueryResult[] fetchQueryResultsBy(AccessKey[] accessKeys) {
+    var requiredQueryResults = new RequiredQueryResult[accessKeys.length];
+    var promises = new CompletableFuture[accessKeys.length];
+
+    var adapter = new QueryResultAdapter();
     var iterator = Arrays.asList(accessKeys).listIterator();
+
     while (iterator.hasNext()) {
       int i = iterator.nextIndex();
       var accessKey = iterator.next();
-      
       String username = accessKey.login();
-      var promise = externalAPI
+      
+      promises[i] = externalAPI
         .get("/users/" + username, ProvidedQueryResult.class)
-        .thenAccept((providedQueryResult) -> {
-          var adapter = new QueryResultAdapter();
-          requiredQueryResult[i] = adapter.adapt(providedQueryResult);
-        });
-
-      promises.add(promise);
+        .thenApply(adapter::adapt)
+        .thenAccept((result) -> requiredQueryResults[i] = result);
     }
 
-    var promiseOfAll = CompletableFuture.allOf(promises.toArray(CompletableFuture[]::new));
+    var promiseOfAll = CompletableFuture.allOf(promises);
     promiseOfAll.join();
 
-    return requiredQueryResult;
+    return requiredQueryResults;
   }
 }

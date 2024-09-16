@@ -1,3 +1,10 @@
+interface ProfileQueryResponse {
+  current_page: number;
+  number_of_pages: number;
+  number_of_results: number;
+  results: ProfileQueryResult[];
+}
+
 interface ProfileQueryResult {
   name: string;
   username: string;
@@ -8,4 +15,4 @@ interface ProfileQueryResult {
   followers: number;
 }
 
-export type { ProfileQueryResult };
+export type { ProfileQueryResponse, ProfileQueryResult };

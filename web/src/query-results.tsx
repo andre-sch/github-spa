@@ -4,19 +4,19 @@ import { Conditional } from "./conditional";
 
 import { ProfileSelectionPublisher } from "./user-selection";
 import { getProfileQueryResults } from "./api";
-import type { ProfileQueryResult } from "./user-query";
+import type { ProfileQueryResponse } from "./user-query";
 
 import "./styles/query-results.css"
 
 function QueryResults(props: { query: string }) {
-  const [results, setResults] = useState<ProfileQueryResult[]>([]);
+  const [queryResponse, setQueryResponse] = useState<ProfileQueryResponse | null>(null);
 
   useEffect(() => {
     if (!props.query) return;
 
     var timeoutId = setTimeout(() => {
       getProfileQueryResults(props.query)
-        .then(setResults);
+        .then(setQueryResponse);
     }, 500);
 
     return () => clearTimeout(timeoutId);
@@ -24,7 +24,7 @@ function QueryResults(props: { query: string }) {
 
   return (
     <ul className="query-results">
-      {results.map(profile => (
+      {queryResponse && queryResponse.results.map(profile => (
         <li key={profile.username}>
           <button onClick={() => select(profile.username)}>
             <img src={profile.avatar_url} alt="avatar" />
