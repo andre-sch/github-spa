@@ -43,7 +43,7 @@ public class UserProfileAggregator {
     var requiredQueryResults = fetchQueryResultsBy(accessKeys);
 
     int numberOfResults = providedQueryResponse.total_count();
-    int numberOfPages = (int) Math.ceil((double) numberOfResults / resultsPerPage);
+    int numberOfPages = Math.min(100, (int) Math.ceil((double) numberOfResults / resultsPerPage));
     return new RequiredQueryResponse(currentPage, numberOfPages, numberOfResults, requiredQueryResults);
   }
 

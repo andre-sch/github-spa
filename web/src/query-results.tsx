@@ -1,30 +1,15 @@
-import { useEffect, useState } from "react";
 import { PeopleIcon, RepoIcon } from "@primer/octicons-react";
 import { Conditional } from "./conditional";
 
 import { ProfileSelectionPublisher } from "./user-selection";
-import { getProfileQueryResults } from "./api";
-import type { ProfileQueryResponse } from "./user-query";
+import type { ProfileQueryResult } from "./query-response";
 
 import "./styles/query-results.css"
 
-function QueryResults(props: { query: string }) {
-  const [queryResponse, setQueryResponse] = useState<ProfileQueryResponse | null>(null);
-
-  useEffect(() => {
-    if (!props.query) return;
-
-    var timeoutId = setTimeout(() => {
-      getProfileQueryResults(props.query)
-        .then(setQueryResponse);
-    }, 500);
-
-    return () => clearTimeout(timeoutId);
-  }, [props.query]);
-
+function QueryResults(props: { results: ProfileQueryResult[] }) {
   return (
     <ul className="query-results">
-      {queryResponse && queryResponse.results.map(profile => (
+      {props.results.map(profile => (
         <li key={profile.username}>
           <button onClick={() => select(profile.username)}>
             <img src={profile.avatar_url} alt="avatar" />

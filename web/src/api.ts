@@ -1,6 +1,6 @@
 import axios from "axios";
 import { UserProfile } from "./user-profile";
-import { ProfileQueryResponse } from "./user-query";
+import { ProfileQueryResponse } from "./query-response";
 
 const api = axios.create({
   baseURL: "http://localhost:8080"
@@ -10,7 +10,7 @@ async function getUserProfile(username: string): Promise<UserProfile | null> {
   return fetch<UserProfile>(`/profiles/${username}`);
 }
 
-async function getProfileQueryResults(query: string, page?: number): Promise<ProfileQueryResponse | null> {
+async function getProfileQueryResponse(query: string, page?: number): Promise<ProfileQueryResponse | null> {
   var route = `/profiles/search?q=${query}`;
   if (page) route += `&page=${page}`;
 
@@ -40,7 +40,7 @@ async function fetch<T>(route: string): Promise<T | null> {
 
 export {
   getUserProfile,
-  getProfileQueryResults,
+  getProfileQueryResponse,
   getProfileReadme,
   profileReadmeHost
 };
