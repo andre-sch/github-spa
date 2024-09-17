@@ -3,6 +3,7 @@ import { Header } from "./header";
 import { UserDetails } from "./user-details";
 import { UserReadme } from "./user-readme";
 import { UserRepositories } from "./user-repositories";
+import { Fallback } from "./fallback";
 import { Footer } from "./footer";
 
 import { ProfileSelectionSubscriber } from "./user-selection";
@@ -26,7 +27,7 @@ function App() {
   return (
     <>
       <Header {...userProfile} />
-      {userProfile &&
+      {userProfile ? (
         <main>
           <UserDetails {...userProfile} />
           <section>
@@ -34,7 +35,7 @@ function App() {
             <UserRepositories {...userProfile} />
           </section>
         </main>
-      }
+      ) : <Fallback />}
       <Footer />
     </>
   );
