@@ -14,7 +14,7 @@ import "./styles/app.css"
 
 function App() {
   const [username, setUsername] = useState("andre-sch");
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>();
 
   const profileSelectionSubscriber = new ProfileSelectionSubscriber();
   profileSelectionSubscriber.subscribe((e) => setUsername(e.detail.username))
@@ -35,7 +35,7 @@ function App() {
             <UserRepositories {...userProfile} />
           </section>
         </main>
-      ) : <Fallback />}
+      ) : userProfile !== undefined ? <Fallback /> : null}
       <Footer />
     </>
   );
