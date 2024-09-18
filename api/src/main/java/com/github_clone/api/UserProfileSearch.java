@@ -1,35 +1,16 @@
 package com.github_clone.api;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Arrays;
+import java.util.concurrent.CompletableFuture;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class UserProfileAggregator {
-  private final String baseURL = "https://api.github.com";
-  private final ExternalAPI externalAPI = new ExternalAPI(baseURL);
-
-  @CrossOrigin
-  @GetMapping("/profiles/{username}")
-  public RequiredUserProfile execute(@PathVariable String username)
-    throws InterruptedException, ExecutionException
-  {
-    var promiseOfUserDetails = externalAPI.get("/users/" + username, ProvidedUserDetails.class);
-    var promiseOfRepositories = externalAPI.get("/users/" + username + "/repos", ProvidedRepository[].class);
-
-    var promiseOfBoth = CompletableFuture.allOf(promiseOfUserDetails, promiseOfRepositories);
-    promiseOfBoth.join();
-
-    var providedUserDetails = promiseOfUserDetails.get();
-    var providedRepositories = promiseOfRepositories.get();
-
-    var adapter = new UserProfileAdapter();
-    return adapter.adapt(providedUserDetails, providedRepositories);
-  }
+public class UserProfileSearch {
+  private final ExternalAPI externalAPI = new ExternalAPI("https://api.github.com");
 
   @CrossOrigin
   @GetMapping("/profiles/search")
-  public RequiredQueryResponse search(
+  public RequiredQueryResponse execute(
     @RequestParam("q") String query,
     @RequestParam(name="page", defaultValue="0") int currentPage
   ) {
@@ -47,7 +28,7 @@ public class UserProfileAggregator {
     return new RequiredQueryResponse(currentPage, numberOfPages, numberOfResults, requiredQueryResults);
   }
 
-  public RequiredQueryResult[] fetchQueryResultsBy(AccessKey[] accessKeys) {
+  private RequiredQueryResult[] fetchQueryResultsBy(AccessKey[] accessKeys) {
     var requiredQueryResults = new RequiredQueryResult[accessKeys.length];
     var promises = new CompletableFuture[accessKeys.length];
 
