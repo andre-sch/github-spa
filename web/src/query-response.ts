@@ -6,10 +6,10 @@ interface ProfileQueryResponse {
 }
 
 interface ProfileQueryResult {
-  name: string;
+  name: string | null;
   username: string;
-  biography: string;
-  location: string;
+  biography: string | null;
+  location: string | null;
   avatar_url: string;
   repositories: number;
   followers: number;

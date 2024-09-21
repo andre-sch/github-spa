@@ -23,12 +23,13 @@
 }
 
 .user-details p {
+  margin-bottom: 1rem;
   font-size: 0.9rem;
   line-height: 1.5;
 }
 
 .user-details button {
-  margin: 1rem 0;
+  margin-bottom: 1rem;
   padding: 0.4rem;
   width: 100%;
   font-size: 0.875rem;

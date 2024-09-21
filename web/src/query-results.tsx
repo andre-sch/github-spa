@@ -15,10 +15,10 @@ function QueryResults(props: { results: ProfileQueryResult[] }) {
             <img src={profile.avatar_url} alt="avatar" />
             <div>
               <header>
-                <h1>{profile.name}</h1>
+                {profile.name && <h1>{profile.name}</h1>}
                 <h2>{profile.username}</h2>
               </header>
-              <p>{profile.biography}</p>
+              {profile.biography && <p>{profile.biography}</p>}
               <footer>
                 <Conditional on={profile.location}>
                   {profile.location}

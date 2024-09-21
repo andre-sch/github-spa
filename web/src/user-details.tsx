@@ -20,10 +20,10 @@ function UserDetails({
   return <aside className="user-details">
     <img src={avatar_url} alt="avatar" />
     <header>
-      <h1>{name}</h1>
+      {name && <h1>{name}</h1>}
       <h2>{username}</h2>
     </header>
-    <p>{biography}</p>
+    {biography && <p>{biography}</p>}
     <button disabled>Follow</button>
     <span><PeopleIcon/> <em>{formatCount(followers)}</em> followers <em>· {formatCount(following)}</em> following</span>
     <ul>

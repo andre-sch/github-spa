@@ -4,15 +4,16 @@ import { Modal } from "./modal";
 
 import "./styles/header.css"
 
-function Header(props: { name?: string; username?: string }) {
-  const [title, setTitle] = useState(document.title);
+function Header(props: { name?: string | null; username?: string }) {
+  const defaultTitle = "Github clone";
+  const [title, setTitle] = useState(defaultTitle);
   const [modalEnabled, setModalEnabled] = useState(false);
 
   useEffect(() => {
     if (props.username) {
       setTitle(props.username);
-      setDocumentTitle();
-    }
+      document.title = props.username + (props.name ? ` (${props.name})` : "");
+    } else document.title = defaultTitle;
   }, [props.username]);
 
   const activationKey = "/";
@@ -40,10 +41,6 @@ function Header(props: { name?: string; username?: string }) {
       {modalEnabled && <Modal setModalEnabled={setModalEnabled} />}
     </header>
   );
-
-  function setDocumentTitle() {
-    document.title = `${props.username} (${props.name})`;
-  }
 }
 
 export { Header };
