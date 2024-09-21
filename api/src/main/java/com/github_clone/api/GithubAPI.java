@@ -1,16 +1,22 @@
 package com.github_clone.api;
 
-import java.util.Map;
-import java.util.HashMap;
+import java.time.*;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+// NOTE: The GitHub API has 2-step authentication. First, a token for the application
+// (GitHub App) is generated, and then it is exchanged for an installation token
+
 @Service
 public class GithubAPI {
   private final String installationId;
   private final Authentication authentication;
+
+  private String installationToken;
+  private Date installationTokenExpiration;
   
   public GithubAPI(Authentication authentication, Environment environment) {
     this.authentication = authentication;
@@ -26,20 +32,30 @@ public class GithubAPI {
   }
 
   private String getInstallationToken() {
-    String applicationToken = authentication.getToken();
-    return exchangeTokens(applicationToken);
+    if (hasInstallationTokenExpired()) {
+      String applicationToken = authentication.getToken();
+      var exchange = exchangeTokens(applicationToken);
+      installationToken = exchange.token();
+      installationTokenExpiration = exchange.expires_at();
+    }
+
+    return installationToken;
   }
 
-  private String exchangeTokens(String applicationToken) {
+  private boolean hasInstallationTokenExpired() {
+    var latency = Duration.ofMinutes(5);
+    var threshold = Date.from(Instant.now().plus(latency));
+    return installationToken == null || installationTokenExpiration.before(threshold);
+  }
+
+  private TokenExchange exchangeTokens(String applicationToken) {
     Map<String, String> headers = new HashMap<>();
     headers.put("Authorization", "Bearer " + applicationToken);
 
-    var response = client.post(TokenExchange.class, "/app/installations/" + installationId + "/access_tokens", headers);
-    String installationToken = response.join().token();
-
-    return installationToken;
+    String route = "/app/installations/" + installationId + "/access_tokens";
+    return client.post(TokenExchange.class, route, headers).join();
   }
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-record TokenExchange(String token /*, Instant expires_at*/) {}
+record TokenExchange(String token, Date expires_at) {}
