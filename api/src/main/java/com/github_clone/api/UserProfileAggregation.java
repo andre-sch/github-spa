@@ -5,15 +5,19 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserProfileAggregation {
-  private final ExternalAPI externalAPI = new ExternalAPI("https://api.github.com");
+  private final GithubAPI githubAPI;
+
+  public UserProfileAggregation(GithubAPI githubAPI) {
+    this.githubAPI = githubAPI;
+  }
 
   @CrossOrigin
   @GetMapping("/profiles/{username}")
   public RequiredUserProfile execute(@PathVariable String username)
     throws InterruptedException, ExecutionException
   {
-    var promiseOfUserDetails = externalAPI.get("/users/" + username, ProvidedUserDetails.class);
-    var promiseOfRepositories = externalAPI.get("/users/" + username + "/repos", ProvidedRepository[].class);
+    var promiseOfUserDetails = githubAPI.get(ProvidedUserDetails.class, "/users/" + username);
+    var promiseOfRepositories = githubAPI.get(ProvidedRepository[].class, "/users/" + username + "/repos");
 
     var promiseOfBoth = CompletableFuture.allOf(promiseOfUserDetails, promiseOfRepositories);
     promiseOfBoth.join();

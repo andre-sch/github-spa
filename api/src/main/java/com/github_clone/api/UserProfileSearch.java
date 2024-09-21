@@ -6,7 +6,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserProfileSearch {
-  private final ExternalAPI externalAPI = new ExternalAPI("https://api.github.com");
+  private final GithubAPI githubAPI;
+
+  public UserProfileSearch(GithubAPI githubAPI) {
+    this.githubAPI = githubAPI;
+  }
 
   @CrossOrigin
   @GetMapping("/profiles/search")
@@ -15,9 +19,9 @@ public class UserProfileSearch {
     @RequestParam(name="page", defaultValue="0") int currentPage
   ) {
     int resultsPerPage = 5;
-    var providedQueryResponse = externalAPI.get(
-      "/search/users?q=" + query + "&per_page=" + resultsPerPage + "&page=" + currentPage,
-      ProvidedQueryResponse.class
+    var providedQueryResponse = githubAPI.get(
+      ProvidedQueryResponse.class,
+      "/search/users?q=" + query + "&per_page=" + resultsPerPage + "&page=" + currentPage
     ).join();
     
     var accessKeys = providedQueryResponse.items();
@@ -40,8 +44,8 @@ public class UserProfileSearch {
       var accessKey = iterator.next();
       String username = accessKey.login();
       
-      promises[i] = externalAPI
-        .get("/users/" + username, ProvidedQueryResult.class)
+      promises[i] = githubAPI
+        .get(ProvidedQueryResult.class, "/users/" + username)
         .thenApply(adapter::adapt)
         .thenAccept((result) -> requiredQueryResults[i] = result);
     }
