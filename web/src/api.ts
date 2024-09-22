@@ -2,9 +2,7 @@ import axios from "axios";
 import { UserProfile } from "./user-profile";
 import { ProfileQueryResponse } from "./query-response";
 
-const api = axios.create({
-  baseURL: "http://localhost:8080"
-});
+const api = axios.create({ baseURL: import.meta.env.VITE_API_URL });
 
 async function getUserProfile(username: string): Promise<UserProfile | null> {
   return fetch<UserProfile>(`/profiles/${username}`);
