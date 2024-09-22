@@ -10,10 +10,10 @@ function Header(props: { name?: string | null; username?: string }) {
   const [modalEnabled, setModalEnabled] = useState(false);
 
   useEffect(() => {
-    if (props.username) {
-      setTitle(props.username);
-      document.title = props.username + (props.name ? ` (${props.name})` : "");
-    } else document.title = defaultTitle;
+    setTitle(props.username ? props.username : defaultTitle);
+    document.title = props.username
+      ? props.username + (props.name ? ` (${props.name})` : "")
+      : defaultTitle;
   }, [props.username]);
 
   const activationKey = "/";
