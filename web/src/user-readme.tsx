@@ -4,7 +4,6 @@ import rehypeRaw from "rehype-raw";
 
 import { getProfileReadme, profileReadmeHost } from "./api";
 
-import "./styles/markdown.css"
 import "./styles/user-readme.css"
 
 function UserReadme(props: { username: string }) {
