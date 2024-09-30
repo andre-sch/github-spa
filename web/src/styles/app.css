@@ -3,9 +3,21 @@ main {
   justify-content: center;
   gap: 1.5rem;
   flex-grow: 1;
-  padding-top: 2rem;
+  padding: 2rem;
+  padding-bottom: 0;
 }
 
 main > section {
   width: 56rem;
+}
+
+@media (max-width: 800px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+    padding-left: 8vw;
+    padding-right: 8vw;
+  }
+
+  main > section { width: 100%; }
 }

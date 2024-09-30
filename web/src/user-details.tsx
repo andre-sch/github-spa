@@ -18,11 +18,13 @@ function UserDetails({
   website
 }: UserProfile) {
   return <aside className="user-details">
-    <img src={avatar_url} alt="avatar" />
-    <header>
-      {name && <h1>{name}</h1>}
-      <h2>{username}</h2>
-    </header>
+    <div>
+      <img src={avatar_url} alt="avatar" />
+      <header>
+        {name && <h1>{name}</h1>}
+        <h2>{username}</h2>
+      </header>
+    </div>
     {biography && <p>{biography}</p>}
     <button disabled>Follow</button>
     <span><PeopleIcon/> <em>{formatCount(followers)}</em> followers <em>· {formatCount(following)}</em> following</span>

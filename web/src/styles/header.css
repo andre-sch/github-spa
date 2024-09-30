@@ -8,13 +8,16 @@
 }
 
 .page-header > h1 {
-  margin-left: 1rem;
+  margin: 0 1rem;
   font-size: 0.875rem;
   font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .page-header > button {
-  margin: 0 0.75rem 0 auto;
+  margin-left: auto;
   width: 22rem;
   height: 2rem;
   padding: 0.3rem 0.5rem;
@@ -25,11 +28,11 @@
 }
 
 .page-header > button svg {
-  margin-right: 0.5rem;
   fill: #9198a1;
 }
 
 .page-header > button span {
+  margin-left: 0.5rem;
   color: #9198a1;
 }
 
@@ -45,7 +48,15 @@
 }
 
 .page-header .delimiter {
+  margin-left: 0.75rem;
   width: 1px;
   height: 1.25rem;
   background-color: #3d444d;
+}
+
+@media (max-width: 800px) {
+  .page-header { padding: 1rem 8vw; }
+  .page-header > button  { width: auto; }
+  .page-header > button span { display: none; }
+  .page-header .delimiter { display: none; }
 }

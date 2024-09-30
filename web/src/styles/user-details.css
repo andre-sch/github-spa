@@ -1,5 +1,6 @@
 .user-details {
-  width: 18.5rem;
+  width: 100%;
+  max-width: 18.5rem;
 }
 
 .user-details img {
@@ -10,6 +11,7 @@
 
 .user-details header {
   margin: 1rem 0;
+  width: 100%;
 }
 
 .user-details h1 {
@@ -69,4 +71,25 @@
 
 .user-details li svg {
   margin-right: 0.5rem;
+}
+
+@media (max-width: 800px) {
+  .user-details {
+    max-width: none;
+  }
+
+  .user-details > div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .user-details header {
+    margin: 0;
+  }
+
+  .user-details img {
+    width: 15vw;
+  }
 }

@@ -4,12 +4,11 @@
 }
 
 .loading .name {
-  margin-top: 1.5rem;
   width: 70%; height: 1.6rem;
 }
 
 .loading .username {
-  margin: 0.5rem 0 1rem;
+  margin-top: 0.5rem;
   width: 30%; height: 1.25rem;
 }
 
@@ -40,4 +39,10 @@
 
 .loading .user-repositories .card {
   height: 6.45rem;
+}
+
+@media (max-width: 800px) {
+  .loading .avatar {
+    width: 15vw;
+  }
 }

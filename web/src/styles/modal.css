@@ -25,6 +25,7 @@
 .modal .input-container input {
   flex-grow: 1;
   color:#9198a1;
+  min-width: 0;
 }
 
 .modal .input-container input:focus-visible { outline: 0; }
@@ -62,4 +63,8 @@
   width: 100%;
   height: 100%;
   background: #21283066;
+}
+
+@media (max-width: 800px) {
+  .modal { left: 0; width: 100%; }
 }

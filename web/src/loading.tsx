@@ -8,9 +8,13 @@ function LoadingUserProfile() {
     <SkeletonTheme baseColor="#1f2937" highlightColor="#33445b">
       <main className="loading">
         <aside className="user-details">
-          <Skeleton className="avatar" />
-          <Skeleton className="name" />
-          <Skeleton className="username" />
+          <div>
+            <Skeleton className="avatar" />
+            <header>
+              <Skeleton className="name" />
+              <Skeleton className="username" />
+            </header>
+          </div>
           <Skeleton className="biography" count={2} />
           <Skeleton className="follow" />
           <Skeleton className="connections" />
