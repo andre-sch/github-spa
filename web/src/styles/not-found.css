@@ -1,14 +1,14 @@
-.fallback {
+.not-found {
   position: relative;
 }
 
-.fallback img:first-of-type {
+.not-found img:first-of-type {
   position: absolute;
   top: 5rem; left: 50%;
   transform: translate(-50%);
 }
 
-.fallback img:last-of-type {
+.not-found img:last-of-type {
   width: 100%;
   height: 25rem;
 }

@@ -1,0 +1,43 @@
+.loading .avatar {
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+}
+
+.loading .name {
+  margin-top: 1.5rem;
+  width: 70%; height: 1.6rem;
+}
+
+.loading .username {
+  margin: 0.5rem 0 1rem;
+  width: 30%; height: 1.25rem;
+}
+
+.loading .biography { height: 1rem; }
+.loading .biography:last-of-type { width: 80%; }
+
+.loading .follow {
+  margin: 1rem 0 0.8rem;
+  height: 2rem;
+}
+
+.loading .connections {
+  margin-bottom: 1rem;
+  width: 70%; height: 1.25rem;
+}
+
+.loading .links:first-of-type { width: 30%; }
+.loading .links:last-of-type { width: 60%; }
+
+.loading .readme {
+  height: 16rem;
+}
+
+.loading .user-repositories .header {
+  margin: 1.5rem 0 0.5rem;
+  width: 6rem; height: 1.25rem;
+}
+
+.loading .user-repositories .card {
+  height: 6.45rem;
+}

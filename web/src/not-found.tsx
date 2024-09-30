@@ -1,12 +1,12 @@
-import "./styles/fallback.css"
+import "./styles/not-found.css"
 
-function Fallback() {
+function UserProfileNotFound() {
   return (
-    <div className="fallback">
+    <div className="not-found">
       <img src="/images/404-scene.png" alt="This is not the web page you are looking for. (404 error)" />
       <img src="/images/404-background.png" alt="" />
     </div>
   );
 }
 
-export { Fallback };
+export { UserProfileNotFound };
