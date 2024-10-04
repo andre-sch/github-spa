@@ -64,8 +64,17 @@ public class HttpClient {
   }
 
   private <T> CompletableFuture<T> send(HttpRequest request, Class<T> responseType) {
-    return http.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-      .thenApply(response -> json.deserialize(response.body(), responseType));
+    return http
+      .sendAsync(request, HttpResponse.BodyHandlers.ofString())
+      .thenApply(response -> {
+        if (isSuccess(response.statusCode())) {
+          return json.deserialize(response.body(), responseType);
+        } else throw new HttpException(response.statusCode());
+      });
+  }
+
+  private boolean isSuccess(int statusCode) {
+    return 200 <= statusCode && statusCode <= 299;
   }
 
   private URI absolutePathOf(String relativePath) {
