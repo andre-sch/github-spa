@@ -2,6 +2,8 @@ package com.github_clone.api;
 
 import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,10 +20,11 @@ public class UserProfileSearch {
     @RequestParam("q") String query,
     @RequestParam(name="page", defaultValue="0") int currentPage
   ) {
-    int resultsPerPage = 5;
+    final int resultsPerPage = 5;
+    String encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8);
     var providedQueryResponse = githubAPI.get(
       ProvidedQueryResponse.class,
-      "/search/users?q=" + query + "&per_page=" + resultsPerPage + "&page=" + currentPage
+      "/search/users?q=" + encodedQuery + "&per_page=" + resultsPerPage + "&page=" + currentPage
     ).join();
     
     var accessKeys = providedQueryResponse.items();

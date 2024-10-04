@@ -1,6 +1,8 @@
 package com.github_clone.api;
 
 import java.util.concurrent.*;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,8 +18,9 @@ public class UserProfileAggregation {
   public RequiredUserProfile execute(@PathVariable String username)
     throws InterruptedException, ExecutionException
   {
-    var promiseOfUserDetails = githubAPI.get(ProvidedUserDetails.class, "/users/" + username);
-    var promiseOfRepositories = githubAPI.get(ProvidedRepository[].class, "/users/" + username + "/repos");
+    String encodedUsername = URLEncoder.encode(username, StandardCharsets.UTF_8);
+    var promiseOfUserDetails = githubAPI.get(ProvidedUserDetails.class, "/users/" + encodedUsername);
+    var promiseOfRepositories = githubAPI.get(ProvidedRepository[].class, "/users/" + encodedUsername + "/repos");
 
     var promiseOfBoth = CompletableFuture.allOf(promiseOfUserDetails, promiseOfRepositories);
     promiseOfBoth.join();
