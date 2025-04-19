@@ -1,10 +1,7 @@
-# GitHub clone
+# GitHub SPA
 
 - Technologies: Java, Spring, React and Typescript
-- Deploy* on <https://web-github-clone.onrender.com>
-
-*The application may require some time to render the first time (from one to two
-minutes) due to server inactivity.
+- Deploy on <https://github-spa.vercel.app>
 
 ## Description
 
